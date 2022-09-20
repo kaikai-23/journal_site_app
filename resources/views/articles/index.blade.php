@@ -14,5 +14,7 @@
             <li><a href="/articles/{{ $article->id }}">{{ $article->title }}</a></li>
         @endforeach
     </ul>
+    <!--新規論文投稿画面へとジャンプする-->
+    <button onclick="location.href='/articles/create'">新規論文投稿</button>
 </body>
 </html>
