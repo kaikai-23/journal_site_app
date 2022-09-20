@@ -19,7 +19,7 @@
         <form action="/articles/{{ $article->id }}" method="post">
             @csrf
             @method('DELETE')
-            <input type="submit" value="削除する" onclick="if(!comfirm('削除しますか？')){return false};">
+            <input type="submit" value="削除する" onclick="if(!confirm('削除しますか？')){return false};">
         </form>
     </div>
 </body>
