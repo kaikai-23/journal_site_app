@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 //Articleクラスを読み込む
 use App\Models\Article;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use App\Http\Requests\ArticleRequest;
 
 class ArticleController extends Controller
 {
@@ -21,7 +22,7 @@ class ArticleController extends Controller
         return view('articles.create');
     }
 
-    public function store(Request $request)
+    public function store(ArticleRequest $request)
     {
         //インスタンスの生成
         $article = new Article;
@@ -43,5 +44,33 @@ class ArticleController extends Controller
         return view('articles.show', ['article' => $article]);
     }
     
+    public function edit($id)
+    {
+        $article = Article::find($id);
+        return view('articles.edit', ['article'=>$article]);
+    }
     
+    public function update(ArticleRequest $request, $id)
+    {
+        //ここはidで探して持ってくる以外はstoreと同じ
+        $article = Article::find($id);
+
+        //値の用意
+        $article->title=$request->title;
+        $article->body=$request->body;
+
+        //保存
+        $article->save();
+
+        //保存したらindexへ
+        return redirect('/articles');
+    }
+
+    public function destroy($id)
+    {
+        $article = Article::find($id);
+        $article->delete();
+
+        return redirect('/articles');
+    }
 }
